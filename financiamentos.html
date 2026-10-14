@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanZen - Financiamentos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- MENU LATERAL / SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h2>FinanZen 🐸</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+                <a href="financiamentos.html" class="nav-item active"><i data-lucide="credit-card"></i> Financiamentos</a>
+                <a href="mercado.html" class="nav-item"><i data-lucide="shopping-cart"></i> Mercado</a>
+                <a href="economias.html" class="nav-item"><i data-lucide="piggy-bank"></i> Economias</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile-card" id="btnAbrirPerfilModal" style="cursor: pointer;">
+                    <div class="avatar" style="font-size: 1.4rem;">🐸</div>
+                    <div class="user-info">
+                        <span class="name">DANIEL</span>
+                        <span style="font-size: 0.75rem; color: #38bdf8; display: flex; align-items: center; gap: 4px;">Editar Perfil ⚙️</span>
+                    </div>
+                </div>
+                <button id="btnConfirmLogout" class="btn-icon-danger" title="Sair" style="background:transparent; border:none; color:#94a3b8; cursor:pointer; font-size:1.2rem;"><i data-lucide="log-out"></i></button>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="top-header">
+                <h1>Financiamentos e Contas 💳</h1>
+            </header>
+            
+            <div class="dashboard-grid">
+                <!-- FORMULÁRIO DE CADASTRO -->
+                <section class="section-box">
+                    <h3>Cadastrar Conta Fixa / Financiamento</h3>
+                    <form id="form-financiamento">
+                        <div class="form-group">
+                            <label for="finan-tipo-conta">Modelo</label>
+                            <select id="finan-tipo-conta" class="form-input">
+                                <option value="fixa">Conta Fixa (Mensal / Recorrente)</option>
+                                <option value="parcelado">Financiamento / Empréstimo (Parcelado)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="finan-nome">Descrição</label>
+                            <input type="text" id="finan-nome" required placeholder="Ex: Aluguel, Parcela Carro..." class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="finan-valor">Valor</label>
+                            <input type="number" step="0.01" id="finan-valor" required placeholder="0.00" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="finan-dia">Dia de Vencimento</label>
+                            <select id="finan-dia" class="form-input"></select>
+                        </div>
+                        <div id="campos-parcelamento-cartao" style="display:none; margin-top: 10px;">
+                            <div class="form-row" style="display:flex; gap:10px;">
+                                <div class="form-group" style="flex:1;">
+                                    <label>Parcela Atual (Pagas)</label>
+                                    <input type="number" id="finan-parcela-atual" value="1" class="form-input">
+                                </div>
+                                <div class="form-group" style="flex:1;">
+                                    <label>Total de Parcelas</label>
+                                    <input type="number" id="finan-total-parcelas" value="12" class="form-input">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" style="margin-top: 14px;">Registar Conta / Financiamento</button>
+                    </form>
+                </section>
+
+                <!-- LISTAGEM -->
+                <section class="section-box">
+                    <h3>Lista de Financiamentos</h3>
+                    <ul id="lista-financiamentos"></ul>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL DE PERFIL UNIVERSAL -->
+    <div id="modal-editar-perfil" class="modal-overlay" style="display: none;">
+        <div class="modal-content fintech-modal">
+            <div class="modal-header">
+                <h3 id="perfil-header-nome-display">Configurações de Perfil</h3>
+                <button id="btn-close-perfil-modal" class="btn-close">&times;</button>
+            </div>
+            <form id="form-editar-perfil">
+                <div class="perfil-avatar-preview-container" style="text-align: center; margin-bottom: 20px;">
+                    <div id="perfil-avatar-preview-display" style="font-size: 3.5rem; display: inline-block;">🐸</div>
+                    <p style="font-size: 0.85rem; color: #94a3b8; margin-top: 5px;">Escolha o seu avatar</p>
+                    <div class="emoji-selector-grid" style="display: flex; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
+                        <button type="button" class="emoji-card" data-emoji="🐸">🐸</button>
+                        <button type="button" class="emoji-card" data-emoji="🦊">🦊</button>
+                        <button type="button" class="emoji-card" data-emoji="🦁">🦁</button>
+                        <button type="button" class="emoji-card" data-emoji="🚀">🚀</button>
+                        <button type="button" class="emoji-card" data-emoji="💎">💎</button>
+                        <button type="button" class="emoji-card" data-emoji="👤">👤</button>
+                    </div>
+                </div>
+                <div class="form-group"><label for="perfil-nome">Nome Completo</label><input type="text" id="perfil-nome" required class="form-input"></div>
+                <div class="form-row" style="display: flex; gap: 10px;">
+                    <div class="form-group" style="flex: 1;"><label for="perfil-salario">Salário Base</label><input type="number" step="0.01" id="perfil-salario" class="form-input"></div>
+                    <div class="form-group" style="width: 110px;"><label for="perfil-moeda">Moeda</label><select id="perfil-moeda" class="form-input"><option value="R$">R$</option><option value="€">€</option><option value="$">$</option></select></div>
+                </div>
+                <div class="modal-footer-actions" style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" id="btn-cancelar-perfil" class="btn-secondary" style="flex: 1;">Cancelar</button>
+                    <button type="submit" class="btn-primary" style="flex: 1;">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE SAÍDA -->
+    <div id="modal-confirm-logout" class="modal-overlay" style="display: none;">
+        <div class="modal-content fintech-modal" style="max-width: 380px; text-align: center; padding: 32px 24px;">
+            <div style="font-size: 3rem; margin-bottom: 12px;">🚪</div>
+            <h3 style="font-size: 1.3rem; color: #f8fafc; margin-bottom: 8px;">Terminar Sessão</h3>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-bottom: 24px;">Tens a certeza de que pretendes sair do FinanZen?</p>
+            <div style="display: flex; gap: 12px;">
+                <button type="button" id="btn-cancelar-logout" class="btn-secondary" style="flex: 1; padding: 12px;">Cancelar</button>
+                <button type="button" id="btn-aceitar-logout" style="flex: 1; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; padding: 12px;">Sim, Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

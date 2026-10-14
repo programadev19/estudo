@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanZen - Acesso Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+</head>
+<body>
+
+    <div class="auth-wrapper">
+        <!-- PAINEL ESQUERDO: CARTÃO DE ACESSO -->
+        <div class="auth-form-side">
+            <div class="auth-card-glass">
+                <div class="auth-header-mobile">
+                    <span>🐸</span>
+                    <h2>FinanZen</h2>
+                </div>
+
+                <!-- Alerta dinâmico -->
+                <div id="auth-alert-box" class="auth-alert error" style="display: none;"></div>
+
+                <!-- Abas -->
+                <div class="auth-tabs">
+                    <button type="button" class="auth-tab-btn active" id="tab-btn-login" onclick="alternarAba('login')">Entrar</button>
+                    <button type="button" class="auth-tab-btn" id="tab-btn-cadastro" onclick="alternarAba('cadastro')">Criar Conta</button>
+                </div>
+
+                <!-- Entrar -->
+                <form id="form-login" class="auth-form-panel">
+                    <div class="form-group">
+                        <label for="login-email">E-mail</label>
+                        <input type="email" id="login-email" required placeholder="seu@email.com" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-senha">Palavra-passe</label>
+                        <input type="password" id="login-senha" required placeholder="••••••••" class="form-input">
+                    </div>
+                    <button type="submit" class="btn-primary">Aceder ao Painel 🚀</button>
+                </form>
+
+                <!-- Cadastro -->
+                <form id="form-cadastro" class="auth-form-panel" style="display: none;">
+                    <div class="form-group">
+                        <label for="cadastro-nome">Nome Completo</label>
+                        <input type="text" id="cadastro-nome" required placeholder="Ex: Daniel" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastro-email">E-mail</label>
+                        <input type="email" id="cadastro-email" required placeholder="seu@email.com" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="cadastro-senha">Palavra-passe</label>
+                        <input type="password" id="cadastro-senha" required placeholder="Mínimo 6 carateres" class="form-input">
+                    </div>
+                    <div style="display: flex; gap: 12px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="cadastro-moeda">Moeda</label>
+                            <select id="cadastro-moeda" class="form-input">
+                                <option value="R$">R$ (BRL)</option>
+                                <option value="€">€ (EUR)</option>
+                                <option value="$">$ (USD)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="cadastro-teto">Teto de Gastos</label>
+                            <input type="number" step="0.01" id="cadastro-teto" placeholder="Opcional" class="form-input">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Registar e Começar ✨</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PAINEL DIREITO: SAPO GIGANTE E TÍTULO -->
+        <div class="auth-visual-side-modern">
+            <div class="sapo-gigante-container">
+                <div class="sapo-glow-bg"></div>
+                <span class="sapo-emoji-gigante">🐸</span>
+                <h1 class="finanzen-titulo-gigante">FinanZen</h1>
+                <p class="finanzen-sub-gigante">O teu assistente financeiro inteligente</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
